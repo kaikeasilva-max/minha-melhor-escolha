@@ -145,8 +145,6 @@
     </div>
 
     <script>
-        // ATENÇÃO: COLOQUE A DATA DO COMEÇO DO SEU NAMORO AQUI ABAIXO (Formato: Ano, Mês-1, Dia)
-        // Exemplo: 12 de Junho de 2024 -> new Date(2024, 5, 12) [Janeiro é 0, Junho é 5]
         const startDate = new Date(2023, 10, 21); 
 
         function updateTimer() {
@@ -180,10 +178,11 @@
             const videoGrid = document.getElementById('video-gallery');
             const photoGrid = document.getElementById('photo-gallery');
 
+            // Os vídeos já nascem preparados em loop e mutados por padrão
             for (let i = 1; i <= 8; i++) {
                 videoGrid.innerHTML += `
                     <div class="media-card" onclick="openLightbox('video${i}.mp4', 'video')">
-                        <video loop muted autoplay playsinline>
+                        <video class="galeria-video" loop muted playsinline>
                             <source src="video${i}.mp4" type="video/mp4">
                         </video>
                     </div>`;
@@ -192,7 +191,7 @@
             for (let i = 2; i <= 21; i++) {
                 photoGrid.innerHTML += `
                     <div class="media-card" onclick="openLightbox('foto${i}.jpeg', 'img')">
-                        <img src="foto${i}.jpeg" alt="Nosso momento">
+                        <img src="foto${i}.jpeg" alt="Nosso moment">
                     </div>`;
             }
         }
@@ -201,8 +200,9 @@
             const lightbox = document.getElementById('lightbox');
             const container = document.getElementById('lightbox-media-container');
             
+            // No Lightbox (tela cheia) o vídeo também abre sem som para não cortar o Froid
             if (type === 'video') {
-                container.innerHTML = `<video id="lightbox-content" controls autoplay loop src="${src}" style="width:100%; max-height:80vh;"></video>`;
+                container.innerHTML = `<video id="lightbox-content" controls muted autoplay loop src="${src}" style="width:100%; max-height:80vh;"></video>`;
             } else {
                 container.innerHTML = `<img id="lightbox-content" src="${src}" style="max-width:100%; max-height:80vh; object-fit:contain;">`;
             }
@@ -215,8 +215,16 @@
         }
 
         function iniciarSite() {
+            // Liga a música de fundo
             const audio = document.getElementById('musica-froid');
-            audio.play().catch(e => console.log("Erro no play:", e));
+            audio.play().catch(e => console.log("Erro no play da música:", e));
+            
+            // Força todos os vídeos da galeria a darem play juntos de forma sincronizada e silenciosa
+            const videos = document.querySelectorAll('.galeria-video');
+            videos.forEach(video => {
+                video.play().catch(e => console.log("Erro no play do vídeo:", e));
+            });
+
             document.getElementById('popup-overlay').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('popup-overlay').style.display = 'none';
