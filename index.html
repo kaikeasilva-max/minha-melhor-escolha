@@ -3,102 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Melhor Escolha ❤️</title>
+    <title>Feliz Dia dos Namorados, Meu Amor ❤️</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #fff5f5; color: #4a148c; text-align: center; overflow-x: hidden; }
         
         /* Alerta Inicial na Tela */
-        #popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 99999; padding: 20px; }
-        .popup-box { background: white; padding: 30px; border-radius: 20px; max-width: 400px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; border: 3px solid #d81b60; }
-        .popup-box h2 { font-size: 1.5rem; color: #d81b60; margin-bottom: 15px; }
+        #popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.9); display: flex; justify-content: center; align-items: center; z-index: 99999; padding: 20px; }
+        .popup-box { background: white; padding: 30px; border-radius: 20px; max-width: 400px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; border: 3px solid #ff4757; }
+        .popup-box h2 { font-size: 1.6rem; color: #ff4757; margin-bottom: 15px; }
         .popup-box p { color: #5c3d52; font-size: 1.1rem; margin-bottom: 25px; line-height: 1.5; }
-        .popup-btn { background: linear-gradient(135deg, #d81b60, #4a148c); color: white; border: none; padding: 14px 28px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(216,27,96,0.3); }
+        .popup-btn { background: linear-gradient(135deg, #ff4757, #9b51e0); color: white; border: none; padding: 14px 28px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(255,71,87,0.4); transition: transform 0.2s; }
+        .popup-btn:hover { transform: scale(1.02); }
 
         /* Efeito de corações caindo */
         .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 999; pointer-events: none; }
-        .heart { position: absolute; display: block; width: 20px; height: 20px; background: rgba(216, 27, 96, 0.4); transform: rotate(-45deg); top: -50px; animation: fallback 5s linear infinite; }
+        .heart { position: absolute; display: block; width: 20px; height: 20px; background: rgba(255, 71, 87, 0.4); transform: rotate(-45deg); top: -50px; animation: fallback 5s linear infinite; }
         @keyframes fallback { 0% { top: -50px; transform: translateX(0) rotate(-45deg); opacity: 1; } 100% { top: 100vh; transform: translateX(100px) rotate(-45deg); opacity: 0; } }
 
-        /* Abertura */
-        .header { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000') no-repeat center center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; }
-        .header h1 { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); font-weight: 700; color: #fff; }
-        .header p { font-size: 1.5rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); font-style: italic; margin-bottom: 30px; }
-        .scroll-down { font-size: 1rem; color: #fce4ec; animation: bounce 2s infinite; font-weight: bold; }
+        /* Banner de Entrada Principal */
+        .header { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000') no-repeat center center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; }
+        .header h1 { font-size: 3.2rem; margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); font-weight: 700; color: #fff; }
+        .header p { font-size: 1.6rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); font-style: italic; margin-bottom: 30px; color: #ffeb3b; font-weight: bold; }
+        .scroll-down { font-size: 1rem; color: #fce4ec; animation: bounce 2s infinite; font-weight: bold; background: rgba(0,0,0,0.4); padding: 8px 15px; border-radius: 20px; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
 
+        /* Containers do Conteúdo */
         .container { max-width: 750px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 2; }
-        section { background: white; border-radius: 20px; padding: 35px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(216, 27, 96, 0.08); border: 1px solid #ffe4e6; }
-        h2 { margin-bottom: 20px; color: #d81b60; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .carta-amor { font-size: 1.1rem; line-height: 1.8; color: #5c3d52; text-align: justify; }
+        section { background: white; border-radius: 20px; padding: 35px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(255, 71, 87, 0.1); border: 1px solid #ffe4e6; }
+        h2 { margin-bottom: 20px; color: #ff4757; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .carta-amor { font-size: 1.15rem; line-height: 1.8; color: #4a148c; text-align: justify; }
 
-        /* Fotos */
+        /* Mural de Fotos de Vocês */
         .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 25px; }
-        .timeline-item { background: #fff; padding: 12px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #fbcfe8; }
-        .timeline-item img { width: 100%; border-radius: 10px; height: 180px; object-fit: cover; }
-        .timeline-item p { margin-top: 12px; font-size: 1rem; font-weight: 600; color: #4a148c; }
+        .timeline-item { background: #fff; padding: 12px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #fbcfe8; transition: transform 0.3s; }
+        .timeline-item:hover { transform: translateY(-5px); }
+        .timeline-item img { width: 100%; border-radius: 10px; height: 260px; object-fit: cover; }
+        .timeline-item p { margin-top: 12px; font-size: 1.05rem; font-weight: 600; color: #ff4757; }
 
-        /* Netflix */
+        /* Seção Especial Netflix */
         .netflix-section { background: #141414; color: white; border: none; }
         .netflix-section h2 { color: #E50914; }
         .netflix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 25px; margin-top: 20px; }
-        .card-movie { background: #181818; padding: 20px; border-radius: 8px; border-bottom: 4px solid #E50914; text-align: left; }
+        .card-movie { background: #181818; padding: 20px; border-radius: 8px; border-bottom: 4px solid #E50914; text-align: left; transition: transform 0.2s; }
+        .card-movie:hover { transform: scale(1.05); }
         .card-movie h3 { font-size: 0.8rem; color: #808080; text-transform: uppercase; margin-bottom: 5px; }
         .card-movie p { font-size: 1rem; font-weight: bold; color: #fff; }
 
         /* Cupons */
         .cupons-grid { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .cupom { border: 2px dashed #d81b60; background: #fff5f7; padding: 20px; border-radius: 12px; }
-        .cupom h3 { font-size: 1.2rem; color: #d81b60; margin-bottom: 5px; }
-        .cupom p { color: #6b21a8; font-size: 0.95rem; }
+        .cupom { border: 2px dashed #ff4757; background: #fff5f7; padding: 20px; border-radius: 12px; text-align: left; }
+        .cupom h3 { font-size: 1.2rem; color: #ff4757; margin-bottom: 5px; }
+        .cupom p { color: #4a148c; font-size: 0.95rem; }
     </style>
 </head>
 <body>
 
     <div id="popup-overlay">
         <div class="popup-box">
-            <h2>Você recebeu uma surpresa do Kaike! ❤️</h2>
-            <p>Clique no botão abaixo para ligar o som da nossa música e abrir o site.</p>
-            <button class="popup-btn" onclick="fecharAlertaETocar()">Ouvir música e entrar 🎵</button>
+            <h2>Feliz Dia dos Namorados! ❤️</h2>
+            <p>O Kaike preparou uma surpresa linda aqui dentro para você. Ative o som para entrar.</p>
+            <button class="popup-btn" onclick="fecharAlertaETocar()">Ativar Música e Entrar 🎵</button>
         </div>
     </div>
 
-    <audio id="musica-froid" loop prefetch>
+    <audio id="musica-froid" loop>
         <source src="https://files.catbox.moe/kivl84.mp3" type="audio/mpeg">
     </audio>
 
     <div class="hearts">
         <div class="heart" style="left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
-        <div class="heart" style="left: 30%; animation-duration: 7s; animation-delay: 2s;"></div>
-        <div class="heart" style="left: 55%; animation-duration: 5s; animation-delay: 1s;"></div>
-        <div class="heart" style="left: 80%; animation-duration: 8s; animation-delay: 3s;"></div>
+        <div class="heart" style="left: 25%; animation-duration: 7s; animation-delay: 1.5s;"></div>
+        <div class="heart" style="left: 50%; animation-duration: 5s; animation-delay: 0.5s;"></div>
+        <div class="heart" style="left: 75%; animation-duration: 8s; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 90%; animation-duration: 6s; animation-delay: 1s;"></div>
     </div>
 
     <div class="header">
-        <h1>Para a minha melhor escolha... ❤️</h1>
-        <p>Fiz isso aqui para te lembrar de um detalhe muito importante.</p>
-        <div class="scroll-down">Desça um pouquinho... ↓</div>
+        <h1>Minha Melhor Escolha ❤️</h1>
+        <p>Feliz Dia dos Namorados, meu amor!</p>
+        <div class="scroll-down">Role para baixo para ver nossa história... ↓</div>
     </div>
 
     <div class="container">
+        
         <section>
-            <h2>❤️ Um Recado do Meu Coração</h2>
+            <h2>❤️ Para a Dona do Meu Melhor Abraço</h2>
             <div class="carta-amor">
-                <p>Às vezes a gente enfrenta nossos próprios invernos e se desentende, mas nada no mundo muda o fato de que você é a minha pessoa favorita. Criei esse cantinho só nosso para mostrar que, mesmo nos dias difíceis e frios, eu continuo escolhendo você e querendo o seu abraço. Me desculpa pelos meus erros? Sou muito melhor quando tenho você do meu lado.</p>
+                <p>Olha para essas fotos nossas aqui embaixo... Olha para tudo o que a gente já viveu e construiu até hoje. Às vezes a gente enfrenta fases difíceis, bate de frente e passa por invernos bobos, mas nada no mundo diminui o tamanho do que eu sinto por você. Você é o meu porto seguro, a pessoa com quem eu amo dividir meus dias, minhas risadas e meus planos.</p>
+                <br>
+                <p>Neste Dia dos Namorados, o meu maior presente é ter você. Me desculpa pelos meus erros? Sou muito mais completo do teu lado. Quero resolver qualquer briga e focar só no que importa: a gente junto.</p>
             </div>
         </section>
 
         <section>
-            <h2>⏳ Nossa História em Detalhes</h2>
-            <p style="color: #6b21a8; font-style: italic;">O que a gente construiu é grande demais para ser esquecido por bobeira...</p>
+            <h2>⏳ Nosso Cantinho, Nossos Momentos</h2>
+            <p style="color: #7f8c8d; font-style: italic; margin-bottom: 15px;">Momentos que ficam guardados para sempre...</p>
             <div class="timeline">
                 <div class="timeline-item">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=500">
-                    <p>Nossos melhores sorrisos ✨</p>
+                    <img src="https://raw.githubusercontent.com/kaikeasilva-max/minha-melhor-escolha/main/WhatsApp%20Image%202026-06-12%20at%2012.23.40%20(1).jpeg" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=500'">
+                    <p>Meu lugar favorito no mundo é do teu lado ✨</p>
                 </div>
                 <div class="timeline-item">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=500">
-                    <p>Meu porto seguro ⚓</p>
+                    <img src="https://raw.githubusercontent.com/kaikeasilva-max/minha-melhor-escolha/main/WhatsApp%20Image%202026-06-12%20at%2012.23.40%20(2).jpeg" onerror="this.src='https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=500'">
+                    <p>Impossível não se apaixonar de novo ❤️</p>
+                </div>
+                <div class="timeline-item">
+                    <img src="https://raw.githubusercontent.com/kaikeasilva-max/minha-melhor-escolha/main/WhatsApp%20Image%202026-06-12%20at%2012.23.40%20(5).jpeg" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=500'">
+                    <p>Nossa sintonia é perfeita 🌹</p>
                 </div>
             </div>
         </section>
@@ -106,27 +118,45 @@
         <section class="netflix-section">
             <h2>🍿 Netflix do Nosso Amor</h2>
             <div class="netflix-grid">
-                <div class="card-movie"><h3>Minha Série Favorita</h3><p>Maratona dos teus abraços e cafuné</p></div>
-                <div class="card-movie"><h3>Romance Premiado</h3><p>O dia em que eu percebi que te amava</p></div>
-                <div class="card-movie"><h3>Próximo Lançamento</h3><p>A nossa reconciliação 🫂</p></div>
+                <div class="card-movie">
+                    <h3>Série Favorita</h3>
+                    <p>Maratona infinita de cafuné e assistir séries juntos no sofá.</p>
+                </div>
+                <div class="card-movie">
+                    <h3>Romance Premiado</h3>
+                    <p>O dia em que a sua risada virou o meu som preferido no mundo.</p>
+                </div>
+                <div class="card-movie">
+                    <h3>Próximo Lançamento</h3>
+                    <p>Nossa reconciliação perfeita pós-briga, com direito a abraço forte. 🫂</p>
+                </div>
             </div>
         </section>
 
         <section>
-            <h2>🎟️ Cupons de Paz (Válidos para sempre)</h2>
+            <h2>🎟️ Seus Cupons de Paz (Tire print para resgatar)</h2>
             <div class="cupons-grid">
-                <div class="cupom"><h3>🎟️ Vale-Abraço que Cura Tudo</h3><p>Para fazer o frio sumir e a gente esquecer qualquer briga.</p></div>
-                <div class="cupom"><h3>🎟️ Vale-Comida Favorita</h3><p>Eu compro o seu lanche favorito para comermos juntos.</p></div>
+                <div class="cupom">
+                    <h3>🎟️ Vale-Fim de Briga Imediato</h3>
+                    <p>Dá direito a um abraço bem apertado daqueles que fazem o mundo parar e o orgulho sumir de vez.</p>
+                </div>
+                <div class="cupom">
+                    <h3>🎟️ Vale-Comida Favorita + Cinema</h3>
+                    <p>Você escolhe o que quer comer e o filme de hoje, por minha conta, sem reclamações.</p>
+                </div>
             </div>
         </section>
+
     </div>
 
     <script>
         function fecharAlertaETocar() {
             var audio = document.getElementById('musica-froid');
+            // Dá o comando de play imediato assim que clica no botão
             audio.play().catch(function(error) {
-                console.log("Erro ao tocar áudio:", error);
+                console.log("Erro ao iniciar áudio:", error);
             });
+            // Oculta o painel de alerta preto
             document.getElementById('popup-overlay').style.display = 'none';
         }
     </script>
