@@ -8,14 +8,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #fff5f5; color: #4a148c; text-align: center; overflow-x: hidden; }
         
-        /* Tela de Entrada para Ativar Música */
-        #welcome-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(135deg, #d81b60, #4a148c); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; color: white; transition: opacity 0.8s ease; }
-        #welcome-screen h2 { font-size: 2rem; margin-bottom: 20px; padding: 0 20px; }
-        #start-btn { background: white; color: #d81b60; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
-        #start-btn:hover { transform: scale(1.05); }
-
-        /* Conteúdo Principal (escondido no começo) */
-        #main-content { opacity: 0; transition: opacity 1s ease; display: none; }
+        /* Alerta Bonito na Tela (Pop-up Inicial) */
+        #popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.75); display: flex; justify-content: center; align-items: center; z-index: 99999; padding: 20px; }
+        .popup-box { background: white; padding: 30px; border-radius: 20px; max-width: 400px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; border: 3px solid #d81b60; animation: popIn 0.4s ease; }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .popup-box h2 { font-size: 1.5rem; color: #d81b60; margin-bottom: 15px; }
+        .popup-box p { color: #5c3d52; font-size: 1.1rem; margin-bottom: 25px; line-height: 1.5; }
+        .popup-btn { background: linear-gradient(135deg, #d81b60, #4a148c); color: white; border: none; padding: 14px 28px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(216,27,96,0.3); transition: transform 0.2s; }
+        .popup-btn:hover { transform: scale(1.03); }
 
         /* Efeito de corações caindo */
         .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 999; pointer-events: none; }
@@ -57,73 +57,73 @@
 </head>
 <body>
 
-    <div id="welcome-screen">
-        <h2>Fiz um lugar especial para nós dois... ❤️</h2>
-        <button id="start-btn" onclick="startUniverse()">Entrar no Nosso Universo 🌌</button>
+    <div id="popup-overlay">
+        <div class="popup-box">
+            <h2>Você recebeu uma surpresa do Kaike! ❤️</h2>
+            <p>Clique no botão abaixo para ouvir a nossa música e abrir o site.</p>
+            <button class="popup-btn" onclick="fecharAlertaETocar()">Ouvir música e entrar 🎵</button>
+        </div>
     </div>
 
     <div style="position: absolute; top: -9999px; left: -9999px;">
-        <div id="youtube-player"></div>
+        <div id="video-froid"></div>
     </div>
 
-    <div id="main-content">
-        <div class="hearts">
-            <div class="heart" style="left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
-            <div class="heart" style="left: 30%; animation-duration: 7s; animation-delay: 2s;"></div>
-            <div class="heart" style="left: 55%; animation-duration: 5s; animation-delay: 1s;"></div>
-            <div class="heart" style="left: 80%; animation-duration: 8s; animation-delay: 3s;"></div>
-        </div>
+    <div class="hearts">
+        <div class="heart" style="left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
+        <div class="heart" style="left: 30%; animation-duration: 7s; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 55%; animation-duration: 5s; animation-delay: 1s;"></div>
+        <div class="heart" style="left: 80%; animation-duration: 8s; animation-delay: 3s;"></div>
+    </div>
 
-        <div class="header">
-            <h1>Para a minha melhor escolha... ❤️</h1>
-            <p>Fiz isso aqui para te lembrar de um detalhe muito importante.</p>
-            <div class="scroll-down">Desça um pouquinho... ↓</div>
-        </div>
+    <div class="header">
+        <h1>Para a minha melhor escolha... ❤️</h1>
+        <p>Fiz isso aqui para te lembrar de um detalhe muito importante.</p>
+        <div class="scroll-down">Desça um pouquinho... ↓</div>
+    </div>
 
-        <div class="container">
-            <section>
-                <h2>❤️ Um Recado do Meu Coração</h2>
-                <div class="carta-amor">
-                    <p>Às vezes a gente enfrenta nossos próprios invernos e se desentende, mas nada no mundo muda o fato de que você é a minha pessoa favorita. Criei esse cantinho só nosso para mostrar que, mesmo nos dias difíceis e frios, eu continuo escolhendo você e querendo o seu abraço. Me desculpa pelos meus erros? Sou muito melhor quando tenho você do meu lado.</p>
+    <div class="container">
+        <section>
+            <h2>❤️ Um Recado do Meu Coração</h2>
+            <div class="carta-amor">
+                <p>Às vezes a gente enfrenta nossos próprios invernos e se desentende, mas nada no mundo muda o fato de que você é a minha pessoa favorita. Criei esse cantinho só nosso para mostrar que, mesmo nos dias difíceis e frios, eu continuo escolhendo você e querendo o seu abraço. Me desculpa pelos meus erros? Sou muito melhor quando tenho você do meu lado.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>⏳ Nossa História em Detalhes</h2>
+            <p style="color: #6b21a8; font-style: italic;">O que a gente construiu é grande demais para ser esquecido por bobeira...</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=500">
+                    <p>Nossos melhores sorrisos ✨</p>
                 </div>
-            </section>
-
-            <section>
-                <h2>⏳ Nossa História em Detalhes</h2>
-                <p style="color: #6b21a8; font-style: italic;">O que a gente construiu é grande demais para ser esquecido por bobeira...</p>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=500">
-                        <p>Nossos melhores sorrisos ✨</p>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=500">
-                        <p>Meu porto seguro ⚓</p>
-                    </div>
+                <div class="timeline-item">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=500">
+                    <p>Meu porto seguro ⚓</p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="netflix-section">
-                <h2>🍿 Netflix do Nosso Amor</h2>
-                <div class="netflix-grid">
-                    <div class="card-movie"><h3>Minha Série Favorita</h3><p>Maratona dos teus abraços e cafuné</p></div>
-                    <div class="card-movie"><h3>Romance Premiado</h3><p>O dia em que eu percebi que te amava</p></div>
-                    <div class="card-movie"><h3>Próximo Lançamento</h3><p>A nossa reconciliação 🫂</p></div>
-                </div>
-            </section>
+        <section class="netflix-section">
+            <h2>🍿 Netflix do Nosso Amor</h2>
+            <div class="netflix-grid">
+                <div class="card-movie"><h3>Minha Série Favorita</h3><p>Maratona dos teus abraços e cafuné</p></div>
+                <div class="card-movie"><h3>Romance Premiado</h3><p>O dia em que eu percebi que te amava</p></div>
+                <div class="card-movie"><h3>Próximo Lançamento</h3><p>A nossa reconciliação 🫂</p></div>
+            </div>
+        </section>
 
-            <section>
-                <h2>🎟️ Cupons de Paz (Válidos para sempre)</h2>
-                <div class="cupons-grid">
-                    <div class="cupom"><h3>🎟️ Vale-Abraço que Cura Tudo</h3><p>Para fazer o frio sumir e a gente esquecer qualquer briga.</p></div>
-                    <div class="cupom"><h3>🎟️ Vale-Comida Favorita</h3><p>Eu compro o seu lanche favorito para comermos juntos.</p></div>
-                </div>
-            </section>
-        </div>
+        <section>
+            <h2>🎟️ Cupons de Paz (Válidos para sempre)</h2>
+            <div class="cupons-grid">
+                <div class="cupom"><h3>🎟️ Vale-Abraço que Cura Tudo</h3><p>Para fazer o frio sumir e a gente esquecer qualquer briga.</p></div>
+                <div class="cupom"><h3>🎟️ Vale-Comida Favorita</h3><p>Eu compro o seu lanche favorito para comermos juntos.</p></div>
+            </div>
+        </section>
     </div>
 
     <script>
-        // Carrega a API do YouTube de forma silenciosa
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -131,7 +131,7 @@
 
         var player;
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
+            player = new YT.Player('video-froid', {
                 height: '0',
                 width: '0',
                 videoId: 'uS1pDbyW6pA', // ID da música Inverno - Froid
@@ -144,23 +144,13 @@
             });
         }
 
-        function startUniverse() {
-            // Toca a música
+        function fecharAlertaETocar() {
+            // Liga a música do YouTube
             if (player && typeof player.playVideo === 'function') {
                 player.playVideo();
             }
-
-            // Esconde a tela de boas-vindas com efeito
-            var welcome = document.getElementById('welcome-screen');
-            var main = document.getElementById('main-content');
-            
-            welcome.style.opacity = '0';
-            main.style.display = 'block';
-            
-            setTimeout(function() {
-                welcome.style.display = 'none';
-                main.style.opacity = '1';
-            }, 800);
+            // Some com o pop-up da tela
+            document.getElementById('popup-overlay').style.display = 'none';
         }
     </script>
 </body>
