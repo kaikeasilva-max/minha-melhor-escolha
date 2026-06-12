@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* DESIGN BASE - ESTILO CONSULTORIA PREMIUM */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background-color: #fffafa; 
@@ -22,7 +21,8 @@
         #popup-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
             background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; 
-            align-items: center; z-index: 99999; padding: 20px; 
+            align-items: center; z-index: 99999; padding: 20px;
+            transition: opacity 0.5s ease;
         }
         .popup-box { 
             background: white; padding: 40px; border-radius: 30px; max-width: 450px; 
@@ -34,13 +34,14 @@
             border: none; padding: 18px 30px; font-size: 1.2rem; font-weight: 600; 
             border-radius: 50px; cursor: pointer; width: 100%; transition: 0.3s; 
         }
+        .popup-btn:hover { transform: scale(1.02); }
 
         /* ANIMAÇÃO DE CORAÇÕES */
         .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; pointer-events: none; }
         .heart { position: absolute; display: block; width: 15px; height: 15px; background: rgba(255, 71, 87, 0.3); transform: rotate(-45deg); top: -50px; animation: flow 6s linear infinite; }
         @keyframes flow { 0% { top: -50px; transform: translateX(0) rotate(-45deg); opacity: 1; } 100% { top: 100vh; transform: translateX(100px) rotate(-45deg); opacity: 0; } }
 
-        /* HEADER IMPACTANTE */
+        /* HEADER */
         .header { 
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('foto1.jpeg') no-repeat center center/cover; 
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; 
@@ -48,38 +49,42 @@
         .header h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; text-shadow: 3px 3px 10px rgba(0,0,0,0.7); }
         .header p { font-size: 1.3rem; margin-top: 10px; font-weight: 300; background: rgba(0,0,0,0.3); padding: 5px 20px; border-radius: 20px; }
 
-        /* CARTA DE AMOR */
         .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 2; }
-        .intro-section { background: white; border-radius: 30px; padding: 40px; margin-bottom: 50px; box-shadow: 0 10px 40px rgba(255, 71, 87, 0.1); }
+        
+        /* CARTA DE AMOR */
+        .intro-section { background: white; border-radius: 30px; padding: 40px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(255, 71, 87, 0.1); }
         .intro-section h2 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff4757; margin-bottom: 20px; }
         .carta-amor { font-size: 1.1rem; line-height: 1.8; color: #444; text-align: center; }
 
-        /* GALERIA DE FOTOS E VÍDEOS - GRID MODERNO */
+        /* CONTADOR DE TEMPO */
+        .timer-section { background: white; border-radius: 30px; padding: 30px; margin-bottom: 50px; box-shadow: 0 10px 40px rgba(255, 71, 87, 0.05); border: 1px solid #ffe4e6; }
+        .timer-section h3 { font-size: 1.1rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .timer-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .timer-box { background: #fff5f5; padding: 10px 20px; border-radius: 15px; min-width: 80px; border: 1px solid #fbcfe8; }
+        .timer-box span { display: block; font-size: 1.8rem; font-weight: bold; color: #ff4757; }
+        .timer-box label { font-size: 0.8rem; color: #6c5ce7; font-weight: 600; }
+
+        /* GALERIA ESTILO POLAROID */
         .gallery-title { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ff4757; margin-bottom: 40px; }
-        .gallery-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 20px; 
-        }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
         .media-card { 
-            background: white; padding: 10px; border-radius: 20px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.4s; 
+            background: white; padding: 15px 15px 40px 15px; border-radius: 4px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.4s ease; cursor: pointer;
         }
-        .media-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(255, 71, 87, 0.2); }
-        .media-card img, .media-card video { 
-            width: 100%; height: 400px; border-radius: 15px; object-fit: cover; 
-            display: block; background: #f1f2f6;
-        }
+        .media-card:hover { transform: translateY(-10px) rotate(1deg); box-shadow: 0 15px 35px rgba(255, 71, 87, 0.2); }
+        .media-card img, .media-card video { width: 100%; height: 380px; border-radius: 2px; object-fit: cover; display: block; background: #f1f2f6; }
+
+        /* VISUALIZADOR DE MÍDIA INTEIRA (LIGHTBOX) */
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.95); z-index: 999999; display: none; justify-content: center; align-items: center; padding: 20px; }
+        #lightbox-content { max-width: 90%; max-height: 85vh; border-radius: 10px; box-shadow: 0 0 30px rgba(255,255,255,0.1); }
+        #lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 2.5rem; cursor: pointer; font-weight: bold; }
 
         /* MENSAGEM FINAL */
-        .final-message { 
-            margin-top: 80px; padding: 60px 20px; background: white; 
-            border-radius: 30px; box-shadow: 0 -10px 40px rgba(255, 71, 87, 0.1); 
-        }
+        .final-message { margin-top: 80px; padding: 60px 20px; background: white; border-radius: 30px; box-shadow: 0 -10px 40px rgba(255, 71, 87, 0.1); }
         .final-message h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: #ff4757; margin-bottom: 20px; }
         .final-message p { font-size: 1.5rem; color: #636e72; font-style: italic; }
+        .destaque-apelido { font-family: 'Dancing Script', cursive; color: #ff4757; font-size: 2.2rem; font-style: normal; display: block; margin-top: 10px; }
         .footer-note { margin-top: 30px; font-size: 0.9rem; color: #b2bec3; }
-
     </style>
 </head>
 <body>
@@ -88,7 +93,7 @@
         <div class="popup-box">
             <h2>FELIZ DIA DOS NAMORADOS ❤️</h2>
             <p>Preparei um lugar especial para nossas fotos.</p>
-            <button class="popup-btn" onclick="iniciarSite()">Ver nossa história </button>
+            <button class="popup-btn" onclick="iniciarSite()">Ver nossa história</button>
         </div>
     </div>
 
@@ -112,29 +117,56 @@
             </div>
         </section>
 
+        <section class="timer-section">
+            <h3>Tempo construindo nossa história:</h3>
+            <div class="timer-grid">
+                <div class="timer-box"><span id="days">00</span><label>Dias</label></div>
+                <div class="timer-box"><span id="hours">00</span><label>Horas</label></div>
+                <div class="timer-box"><span id="minutes">00</span><label>Minutos</label></div>
+                <div class="timer-box"><span id="seconds">00</span><label>Segundos</label></div>
+            </div>
+        </section>
+
         <h2 class="gallery-title">Nossos Momentos ✨</h2>
-
-        <div class="gallery-grid" id="video-gallery">
-            </div>
-
-        <div style="margin: 40px 0;"></div>
-
-        <div class="gallery-grid" id="photo-gallery">
-            </div>
+        <div class="gallery-grid" id="video-gallery"></div>
+        <div style="margin: 20px 0;"></div>
+        <div class="gallery-grid" id="photo-gallery"></div>
 
         <section class="final-message">
             <h2>Eu te amo muito!</h2>
-            <p>...e amo cada detalhe seu, principalmente esses seus olhos que me encantam tanto.</p>
+            <p>...e amo cada detalhe seu, principalmente esses seus olhos que me encantam tanto, <span class="destaque-apelido">minha branquinha.</span></p>
             <div class="footer-note">Para sempre nós dois. ❤️</div>
         </section>
+    </div>
 
+    <div id="lightbox" onclick="closeLightbox()">
+        <span id="lightbox-close">&times;</span>
+        <div id="lightbox-media-container" onclick="event.stopPropagation()"></div>
     </div>
 
     <script>
-        // Função para gerar os corações na tela
+        // ATENÇÃO: COLOQUE A DATA DO COMEÇO DO SEU NAMORO AQUI ABAIXO (Formato: Ano, Mês-1, Dia)
+        // Exemplo: 12 de Junho de 2024 -> new Date(2024, 5, 12) [Janeiro é 0, Junho é 5]
+        const startDate = new Date(2023, 10, 21); 
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
         function createHearts() {
             const container = document.getElementById('heart-container');
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 20; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.style.left = Math.random() * 100 + '%';
@@ -144,31 +176,44 @@
             }
         }
 
-        // Função para gerar as fotos e vídeos automaticamente
         function loadGallery() {
             const videoGrid = document.getElementById('video-gallery');
             const photoGrid = document.getElementById('photo-gallery');
 
-            // Carregar 8 Vídeos
             for (let i = 1; i <= 8; i++) {
                 videoGrid.innerHTML += `
-                    <div class="media-card">
-                        <video controls loop muted playsinline>
+                    <div class="media-card" onclick="openLightbox('video${i}.mp4', 'video')">
+                        <video loop muted autoplay playsinline>
                             <source src="video${i}.mp4" type="video/mp4">
                         </video>
                     </div>`;
             }
 
-            // Carregar 21 Fotos (Começando da 2, pois a 1 está no topo)
             for (let i = 2; i <= 21; i++) {
                 photoGrid.innerHTML += `
-                    <div class="media-card">
-                        <img src="foto${i}.jpeg" alt="Nosso momento ${i}">
+                    <div class="media-card" onclick="openLightbox('foto${i}.jpeg', 'img')">
+                        <img src="foto${i}.jpeg" alt="Nosso momento">
                     </div>`;
             }
         }
 
-        // Iniciar áudio e site
+        function openLightbox(src, type) {
+            const lightbox = document.getElementById('lightbox');
+            const container = document.getElementById('lightbox-media-container');
+            
+            if (type === 'video') {
+                container.innerHTML = `<video id="lightbox-content" controls autoplay loop src="${src}" style="width:100%; max-height:80vh;"></video>`;
+            } else {
+                container.innerHTML = `<img id="lightbox-content" src="${src}" style="max-width:100%; max-height:80vh; object-fit:contain;">`;
+            }
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.getElementById('lightbox-media-container').innerHTML = '';
+        }
+
         function iniciarSite() {
             const audio = document.getElementById('musica-froid');
             audio.play().catch(e => console.log("Erro no play:", e));
@@ -176,12 +221,13 @@
             setTimeout(() => {
                 document.getElementById('popup-overlay').style.display = 'none';
             }, 500);
+            setInterval(updateTimer, 1000);
         }
 
-        // Executar ao carregar
         window.onload = () => {
             createHearts();
             loadGallery();
+            updateTimer();
         };
     </script>
 </body>
